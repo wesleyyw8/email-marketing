@@ -1,5 +1,5 @@
 <div class="logo">
-	<img src="../img/email-marketing-proposal-06.png">
+	<img src="../img/email-marketing-proposal-06_02.png">
 </div>
 <div class="l-formulario">
 	<div class="pergunta">
@@ -8,6 +8,18 @@
 			<p> <input type="radio" ng-model="question1.finalAnswer" value="{{question1.answers[0]}}">{{question1.answers[0]}}</span></p>
 			<p> <input type="radio" ng-model="question1.finalAnswer" value="{{question1.answers[1]}}">{{question1.answers[1]}}</span></p>
 			<p> <input type="radio" ng-model="question1.finalAnswer" value="{{question1.answers[2]}}">{{question1.answers[2]}}</span></p>
+		</div>
+	</div>
+
+	<div class="pergunta">
+		<div class="pergunta--header"><div class="number">2</div>
+		<div class="title">Sua empresa tem necessidade de implementar uma solução de tecnologia para gerenciar as seguintes expertises:</div>
+	</div>
+		<div class="pergunta--content"  ng-repeat="question in question2">
+			<input type="checkbox" ng-model="question.selected" ng-change="checkAllNestedCheckboxes($index)">{{question.name}}
+			<div class="pergunta--content__level2" ng-repeat="sub in question.subQuestionslevel2">
+        <input type="checkbox" ng-model="sub.selected">{{sub.name}}
+			</div>	
 		</div>
 	</div>
 
@@ -21,4 +33,5 @@
 	<div class="pergunta--content">
 		<button type="button" class="btn btn-primary" ng-click="saveFormulario()">Save</button>
 	</div>
+
 </div>

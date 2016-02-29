@@ -23,6 +23,7 @@
 .logo {
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 .logo img {
   height: 400px;
@@ -45,4 +46,7 @@
 }
 .pergunta--content {
   margin-left: 30px;
+}
+.pergunta--content__level2 {
+  margin-left: 10px;
 }
