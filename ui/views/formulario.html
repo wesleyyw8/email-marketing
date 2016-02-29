@@ -1,0 +1,24 @@
+<div class="logo">
+	<img src="../img/email-marketing-proposal-06.png">
+</div>
+<div class="l-formulario">
+	<div class="pergunta">
+		<div class="pergunta--header"><div class="number">1</div><div class="title">{{question1.question}}</div></div>
+		<div class="pergunta--content">
+			<p> <input type="radio" ng-model="question1.finalAnswer" value="{{question1.answers[0]}}">{{question1.answers[0]}}</span></p>
+			<p> <input type="radio" ng-model="question1.finalAnswer" value="{{question1.answers[1]}}">{{question1.answers[1]}}</span></p>
+			<p> <input type="radio" ng-model="question1.finalAnswer" value="{{question1.answers[2]}}">{{question1.answers[2]}}</span></p>
+		</div>
+	</div>
+
+	<div class="pergunta">
+		<div class="pergunta--header"><div class="number">3</div><div class="title">{{question3.question}}</div></div>
+		<div class="pergunta--content">
+			<p> <input type="radio" ng-model="question3.finalAnswer" value="{{question3.answers[0]}}">{{question3.answers[0]}}</span></p>
+			<p> <input type="radio" ng-model="question3.finalAnswer" value="{{question3.answers[1]}}">{{question3.answers[1]}}</span></p>
+		</div>
+	</div>
+	<div class="pergunta--content">
+		<button type="button" class="btn btn-primary" ng-click="saveFormulario()">Save</button>
+	</div>
+</div>

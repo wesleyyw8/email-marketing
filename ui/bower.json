@@ -1,0 +1,22 @@
+{
+  "name": "email-marketing-ui",
+  "version": "0.0.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.0",
+    "angular-route": "1.5.0",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.0",
+    "AngularJS-Toaster": "angularjs-toaster#^1.2.0"
+  },
+  "devDependencies": {
+    "components-font-awesome": "^4.5.0"
+  }
+}
