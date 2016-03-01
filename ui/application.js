@@ -5,14 +5,32 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
 			templateUrl: '../views/formulario.html',
 			controller: 'FormularioController'
 		}).
+		when('/end', {
+			templateUrl: '../views/end.html',
+			controller: 'EndController'
+		}).
 		otherwise({
 			redirectTo: '/formulario'
 		});
 }]);
 
+app.factory('Config', function() {
+	var baseUrl = "http://agilesolutions.com:8080/";
+	return {
+		base_url: baseUrl,
+		endpoints: {
+	    	questionario: "questionario/",
+		}
+	};
+});
+app.controller('EndController',
+['$scope','$http','$routeParams','$location','Config', function($scope,$http,
+routeParams,location,Config){
+	
+}]);
 app.controller('FormularioController',
-['$scope','$http','$routeParams','$location', function($scope,$http,
-routeParams,location){
+['$scope','$http','$routeParams','$location','Config', function($scope,$http,
+routeParams,location,Config){
 	$scope.question1 = {
 		question: "Qual é o seu papel no processo de decisão da empresa?",
 		answers: ["Eu decido.", "Eu influencio nas questões.", "Eu não me envolvo nas decisões."],
@@ -68,7 +86,35 @@ routeParams,location){
 		finalAnswer: ""
 	};
 	$scope.saveFormulario = function(){
-		console.log($scope.question2);
+		var obj = {
+			"nome": $scope.nomeCliente,
+			"sobrenome": $scope.sobrenomeCliente,
+			"empresa": $scope.empresaCliente,
+			"cargo": $scope.cargoCliente,
+			"email": $scope.emailCliente,
+			"telefone": $scope.telefoneCliente,
+			"perguntas": {
+				"p1": $scope.question1.finalAnswer,
+				"p2": formatQuestion2(),
+				"p3": $scope.question1.finalAnswer
+			}
+		};
+		/*$http.post(Config.base_url+Config.endpoints.questionario, obj, function(resp){
+			console.log(resp);
+		});*/
 		
+	}
+	function formatQuestion2(){
+		var resp = [];
+		/*console.log($scope.question2);*/
+		angular.forEach($scope.question2, function(val){
+			if (val.selected)
+				resp.push(val.name);
+			angular.forEach(val.subQuestionslevel2, function(subItem){
+				if (subItem.selected)
+					resp.push(subItem.name);
+			});
+		});
+		return resp;
 	}
 }]);
