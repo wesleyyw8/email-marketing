@@ -1,6 +1,33 @@
 <div class="logo">
 	<img src="../img/email-marketing-proposal-06_02.png">
 </div>
+<div class="pergunta__header">
+	<div class="container-fluid">
+	  <div class="row">
+	    <div class="col-xs-6">
+	    	<div class="row">
+	    		<div class="col-xs-12 text">Responda o formulário abaixo e apresente a página de confirmação em nosso estande para ganhar um Bastão Selfie.</div>	
+	    		<div class="col-xs-12 text">Aproveite para conversar com nossos especialistas e participe de nossas palestras.</div>	
+	    	</div>
+	    </div>
+	    <div class="col-xs-3 margin-top-20">
+	    	<div class="row">
+	    		<div class="col-xs-12 margin-top-10"><input type="text" placeholder="Nome" ng-model="nomeCliente"></div>
+	    		<div class="col-xs-12 margin-top-10"><input type="text" placeholder="Empresa" ng-model="empresaCliente"></div>
+	    		<div class="col-xs-12 margin-top-10"><input type="text" placeholder="Email" ng-model="emailCliente"></div>
+	    	</div>
+	    </div>
+	    <div class="col-xs-3 margin-top-20">
+	    	<div class="row">
+	    		<div class="col-xs-12 margin-top-10"><input type="text" placeholder="Sobrenome" ng-model="sobrenomeCliente"></div>
+	    		<div class="col-xs-12 margin-top-10"><input type="text" placeholder="Cargo" ng-model="cargoCliente"></div>
+	    		<div class="col-xs-12 margin-top-10"><input type="text" placeholder="Telefone" ng-model="telefoneCliente"></div>
+	    	</div>
+	    </div>
+	  </div>
+	</div>
+	<div class="triangle"></div>
+</div>
 <div class="l-formulario">
 	<div class="pergunta">
 		<div class="pergunta--header"><div class="number">1</div><div class="title">{{question1.question}}</div></div>
@@ -18,7 +45,7 @@
 		<div class="pergunta--content"  ng-repeat="question in question2">
 			<input type="checkbox" ng-model="question.selected">{{question.name}}
 			<div class="pergunta--content__level2" ng-repeat="sub in question.subQuestionslevel2">
-        <input type="checkbox" ng-model="sub.selected" ng-checked="question.selected">{{sub.name}}
+        <input type="checkbox" ng-model="sub.selected">{{sub.name}}
 			</div>	
 		</div>
 	</div>

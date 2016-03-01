@@ -55,11 +55,8 @@ routeParams,location){
 		answers: ["Sim.", "Não."],
 		finalAnswer: ""
 	};
-	$scope.checkAllNestedCheckboxes = function(id){
-		//angular.element(""+id)
-		console.log(id);
-	}
 	$scope.saveFormulario = function(){
-		console.log($scope.question1);
+		console.log($scope.question2);
+		
 	}
 }]);
