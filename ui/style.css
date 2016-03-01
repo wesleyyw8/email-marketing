@@ -53,6 +53,9 @@ input:-ms-input-placeholder {
   margin-left: 10px;
 }
 
+.l-fim {
+  overflow-x: hidden;
+}
 .l-formulario {
   display: block;
   position: relative;

@@ -17,6 +17,7 @@
     "AngularJS-Toaster": "angularjs-toaster#^1.2.0"
   },
   "devDependencies": {
-    "components-font-awesome": "^4.5.0"
+    "components-font-awesome": "^4.5.0",
+    "angular-loading-spinner": "^0.0.3"
   }
 }

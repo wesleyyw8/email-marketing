@@ -1,4 +1,4 @@
-var app = angular.module('emailMarketingApp',['ngRoute']);
+var app = angular.module('emailMarketingApp',['ngRoute','ngLoadingSpinner']);
 app.config(['$routeProvider', '$locationProvider', function($routeProvider,$locationProvider){
 	$routeProvider.
 		when('/formulario', {
@@ -85,10 +85,11 @@ routeParams,location,Config){
 		answers: ["Sim.", "Não."],
 		finalAnswer: ""
 	};
+
 	$scope.saveFormulario = function(){
 		var obj = {
 			"nome": $scope.nomeCliente,
-			"sobrenome": $scope.sobrenomeCliente,
+			"sobrenome": $scope.sobrenomeCliente,	
 			"empresa": $scope.empresaCliente,
 			"cargo": $scope.cargoCliente,
 			"email": $scope.emailCliente,
@@ -99,9 +100,13 @@ routeParams,location,Config){
 				"p3": $scope.question1.finalAnswer
 			}
 		};
-		/*$http.post(Config.base_url+Config.endpoints.questionario, obj, function(resp){
-			console.log(resp);
-		});*/
+		
+		$http.post(Config.base_url+Config.endpoints.questionario, obj).then(function(response){
+			console.log('deu certo', response);
+		}, function(err){
+			console.log('deu erro', err);
+		});
+		//location.path("/end");
 		
 	}
 	function formatQuestion2(){

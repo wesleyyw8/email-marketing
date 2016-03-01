@@ -1,4 +1,4 @@
-var app = angular.module('emailMarketingApp',['ngRoute']);
+var app = angular.module('emailMarketingApp',['ngRoute','ngLoadingSpinner']);
 app.config(['$routeProvider', '$locationProvider', function($routeProvider,$locationProvider){
 	$routeProvider.
 		when('/formulario', {
