@@ -1,6 +1,7 @@
 app.controller('FormularioController',
-['$scope','$http','$routeParams','$location','Config', function($scope,$http,
-routeParams,location,Config){
+['$scope','$http','$routeParams','$location','Config','toaster','usSpinnerService' ,function($scope,$http,
+routeParams,location,Config, toaster,usSpinnerService){
+	var emailRegex = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
 	$scope.question1 = {
 		question: "Qual é o seu papel no processo de decisão da empresa?",
 		answers: ["Eu decido.", "Eu influencio nas questões.", "Eu não me envolvo nas decisões."],
@@ -55,8 +56,9 @@ routeParams,location,Config){
 		answers: ["Sim.", "Não."],
 		finalAnswer: ""
 	};
-
 	$scope.saveFormulario = function(){
+		if (!checkRequiredFields())
+			return;
 		var obj = {
 			"nome": $scope.nomeCliente,
 			"sobrenome": $scope.sobrenomeCliente,	
@@ -71,13 +73,26 @@ routeParams,location,Config){
 			}
 		};
 		
+		angular.element("#loader").show();
 		$http.post(Config.base_url+Config.endpoints.questionario, obj).then(function(response){
 			console.log('deu certo', response);
+			angular.element("#loader").hide();
+			location.path("/end");
 		}, function(err){
 			console.log('deu erro', err);
+			angular.element("#loader").hide();
 		});
-		//location.path("/end");
-		
+	}
+	function checkRequiredFields(){
+		if (!emailRegex.test($scope.emailCliente)){
+			toasterMessage('O campo email deve conter um email valido');
+
+			return false;
+		}
+		return true;
+	}
+	function toasterMessage(msg){
+		toaster.pop({type: 'error', "title": msg});
 	}
 	function formatQuestion2(){
 		var resp = [];

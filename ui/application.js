@@ -1,4 +1,4 @@
-var app = angular.module('emailMarketingApp',['ngRoute','ngLoadingSpinner']);
+var app = angular.module('emailMarketingApp',['ngRoute','toaster','angularSpinner']);
 app.config(['$routeProvider', '$locationProvider', function($routeProvider,$locationProvider){
 	$routeProvider.
 		when('/formulario', {
@@ -24,35 +24,15 @@ app.factory('Config', function() {
 	};
 });
 
-var obj = {
- "nome": "wes",
- "sobrenome": "Rebe",
- "empresa": "agile",
- "cargo": "forntend",
- "email": "wesleyyw8@gmai",
- "telefone": "123123",
- "perguntas": {
-  "p1": "Eu influencio nas questões.",
-  "p2": ["SAP S/4 HANA", "Migração SAP ERP para S/4 Nuvem", "Solução Integral Agro (AgroBiz)", "GIS", "Outros"],
-  "p3": "Eu influencio nas questões."
- }
-};
-$.ajax({url: "http://agilesolutions.com:8080/questionario/",
-	type: "POST",
-	data: obj,
-	success: function(result){
-  	alert('deu certo')  ;
-	}
-});
-
 app.controller('EndController',
 ['$scope','$http','$routeParams','$location','Config', function($scope,$http,
 routeParams,location,Config){
 	
 }]);
 app.controller('FormularioController',
-['$scope','$http','$routeParams','$location','Config', function($scope,$http,
-routeParams,location,Config){
+['$scope','$http','$routeParams','$location','Config','toaster','usSpinnerService' ,function($scope,$http,
+routeParams,location,Config, toaster,usSpinnerService){
+	var emailRegex = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
 	$scope.question1 = {
 		question: "Qual é o seu papel no processo de decisão da empresa?",
 		answers: ["Eu decido.", "Eu influencio nas questões.", "Eu não me envolvo nas decisões."],
@@ -107,8 +87,9 @@ routeParams,location,Config){
 		answers: ["Sim.", "Não."],
 		finalAnswer: ""
 	};
-
 	$scope.saveFormulario = function(){
+		if (!checkRequiredFields())
+			return;
 		var obj = {
 			"nome": $scope.nomeCliente,
 			"sobrenome": $scope.sobrenomeCliente,	
@@ -123,13 +104,26 @@ routeParams,location,Config){
 			}
 		};
 		
+		angular.element("#loader").show();
 		$http.post(Config.base_url+Config.endpoints.questionario, obj).then(function(response){
 			console.log('deu certo', response);
+			angular.element("#loader").hide();
+			location.path("/end");
 		}, function(err){
 			console.log('deu erro', err);
+			angular.element("#loader").hide();
 		});
-		//location.path("/end");
-		
+	}
+	function checkRequiredFields(){
+		if (!emailRegex.test($scope.emailCliente)){
+			toasterMessage('O campo email deve conter um email valido');
+
+			return false;
+		}
+		return true;
+	}
+	function toasterMessage(msg){
+		toaster.pop({type: 'error', "title": msg});
 	}
 	function formatQuestion2(){
 		var resp = [];
