@@ -1,21 +1,42 @@
 module.exports = function(grunt){
 	grunt.initConfig({
+		jshint: {
+		  all: ['application.js']
+		},
+		uglify: {
+			my_target: {
+			  files: {
+			    'application.min.js': ['application.js']
+			  }
+			}
+		},
+		cssmin: {
+		  options: {
+		    shorthandCompacting: false,
+		    roundingPrecision: -1
+		  },
+		  target: {
+		    files: {
+		      'style.min.css': ['style.css']
+		    }
+		  }
+		},
 		concat:{
 			js:{
-				src: ['ui/controllers/*.js','ui/directives/{,*/}*.js'],
-				dest: 'ui/application.js'
+				src: ['controllers/*.js','directives/{,*/}*.js'],
+				dest: 'application.js'
 			}
 		},
 	    less: {
-	      	'ui/style.css': ['ui/css/*.less','ui/directives/{,*/}*.less']
+	      	'style.css': ['css/*.less','directives/{,*/}*.less']
 	    },
 		watch: {
 			scripts: {
-		        files: ['ui/controllers/*.js','ui/directives/{,*/}*.js'],
-		        tasks: ['concat']
+		        files: ['controllers/*.js','directives/{,*/}*.js'],
+		        tasks: ['concat','uglify']
 			},
 			less: {
-	            files: ['ui/css/*.less','ui/directives/{,*/}*.less'],
+	            files: ['css/*.less','directives/{,*/}*.less'],
 	            tasks: ["less"],
 	            options: {
 	                livereload: true
@@ -25,12 +46,17 @@ module.exports = function(grunt){
 		        options: {
 		          livereload: true
 		        },
-		        files: ['ui/controllers/*.js','ui/css/*.less','ui/directives/{,*/}*.js', 'ui/directives/{,*/}*.less']
+		        files: ['controllers/*.js','css/*.less','directives/{,*/}*.js', 'directives/{,*/}*.less']
 			}
 		}
 	});
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
-	grunt.registerTask('default', ['concat:js','less','watch']);
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.registerTask('default', ['concat:js','less','watch','uglify']);
+	grunt.registerTask('minif',['uglify','cssmin']);
+	grunt.registerTask('jshint',['jshint']);
 };

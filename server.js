@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-app.use(express.static(__dirname + '/ui')); 
+app.use(express.static(__dirname + '')); 
 
 var portNumber = 3001;
 var server = app.listen(portNumber,function(){
@@ -10,5 +10,5 @@ var server = app.listen(portNumber,function(){
 var router = express.Router();
 
 app.get('*', function(req, res) {
-    res.sendfile('./ui/views/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+    res.sendfile('./index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });

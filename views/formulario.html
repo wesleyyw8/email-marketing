@@ -40,7 +40,7 @@
 		<div class="title">Sua empresa tem necessidade de implementar uma solução de tecnologia para gerenciar as seguintes expertises:</div>
 	</div>
 		<div class="pergunta--content"  ng-repeat="question in question2">
-			<input type="checkbox" ng-model="question.selected">{{question.name}}
+			<input type="checkbox" ng-model="question.selected"><span class="subQuestionTitle">{{question.name}}</span>
 			<div class="pergunta--content__level2" ng-repeat="sub in question.subQuestionslevel2">
         <input type="checkbox" ng-model="sub.selected">{{sub.name}}
 			</div>	

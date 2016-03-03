@@ -52,8 +52,8 @@ routeParams,location,Config, toaster,usSpinnerService){
 		}];
 
 	$scope.question3 = {
-		question: "Autorizo a AGILE a ultilizar informação aqui declarada para o desenvolvimento de campanhas de mercado, convites e eventos, atualizações de base de dados e para futuros contatos comerciais?",
-		answers: ["Sim.", "Não."],
+		question: "Autorizo a AGILE a ultilizar informação aqui declarada para o desenvolvimento de campanhas de mercado, convites e eventos, atualizações de base de dados e para futuros contatos comerciais.",
+		answers: ["Sim", "Não"],
 		finalAnswer: ""
 	};
 	$scope.saveFormulario = function(){
@@ -69,7 +69,7 @@ routeParams,location,Config, toaster,usSpinnerService){
 			"perguntas": {
 				"p1": $scope.question1.finalAnswer,
 				"p2": formatQuestion2(),
-				"p3": $scope.question1.finalAnswer
+				"p3": $scope.question3.finalAnswer
 			}
 		};
 		
@@ -82,7 +82,7 @@ routeParams,location,Config, toaster,usSpinnerService){
 			console.log('deu erro', err);
 			angular.element("#loader").hide();
 		});
-	}
+	};
 	function checkRequiredFields(){
 		if (!emailRegex.test($scope.emailCliente)){
 			toasterMessage('O campo email deve conter um email valido');

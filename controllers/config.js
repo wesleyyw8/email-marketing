@@ -2,11 +2,11 @@ var app = angular.module('emailMarketingApp',['ngRoute','toaster','angularSpinne
 app.config(['$routeProvider', '$locationProvider', function($routeProvider,$locationProvider){
 	$routeProvider.
 		when('/formulario', {
-			templateUrl: '../views/formulario.html',
+			templateUrl: 'views/formulario.html',
 			controller: 'FormularioController'
 		}).
 		when('/end', {
-			templateUrl: '../views/end.html',
+			templateUrl: 'views/end.html',
 			controller: 'EndController'
 		}).
 		otherwise({

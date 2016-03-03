@@ -1,6 +1,7 @@
 .title{
 	font-weight: bold;
 	display: table-cell;
+  padding-left: 10px;
 }
 .number{	
   background-color: #3ea9de;
@@ -36,11 +37,17 @@
 .margin-top-10{
   margin-top: 10px;
 }
+input::-ms-clear {
+  display:none;
+}
 input[type="text"]{
   background-color : #3ea9de;
   border:1px solid white;
   font-weight: normal;
   width: 100%;
+}
+input[type="radio"], input[type="checkbox"]{
+  margin-right: 5px;
 }
 input::-webkit-input-placeholder {
   color: white !important;

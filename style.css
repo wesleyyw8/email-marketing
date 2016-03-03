@@ -1,6 +1,7 @@
 .title {
   font-weight: bold;
   display: table-cell;
+  padding-left: 10px;
 }
 .number {
   background-color: #3ea9de;
@@ -36,11 +37,18 @@
 .margin-top-10 {
   margin-top: 10px;
 }
+input::-ms-clear {
+  display: none;
+}
 input[type="text"] {
   background-color: #3ea9de;
   border: 1px solid white;
   font-weight: normal;
   width: 100%;
+}
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 5px;
 }
 input::-webkit-input-placeholder {
   color: white !important;
@@ -79,13 +87,13 @@ input:-ms-input-placeholder {
   height: 400px;
 }
 .pergunta__header {
-  height: 200px;
   max-width: 900px;
   background-color: #3ea9de;
   color: white;
   font-weight: bold;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 20px;
 }
 .pergunta__header .text {
   margin-top: 15px;
@@ -104,9 +112,10 @@ input:-ms-input-placeholder {
   background: -o-linear-gradient(to right, #c9c9c9, white, #c9c9c9);
 }
 .fim__content .leftContent .bloco {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-left: 30px;
   font-family: cursive;
+  font-size: 20px;
 }
 .fim__content .leftContent span {
   display: block;
@@ -141,9 +150,13 @@ input:-ms-input-placeholder {
   display: table;
 }
 .pergunta--content {
-  margin-left: 30px;
+  margin-left: 40px;
   margin-top: 10px;
 }
 .pergunta--content__level2 {
   margin-left: 10px;
+}
+.subQuestionTitle {
+  color: gray;
+  font-weight: bold;
 }
