@@ -151,8 +151,9 @@ routeParams,location,Config, toaster,usSpinnerService){
 			angular.element("#loader").hide();
 			location.path("/end");
 		}, function(err){
-			console.log('deu erro', err);
 			angular.element("#loader").hide();
+			if (err.data.message.indexOf("Duplicate entry") != -1)
+				toasterMessage("Email já cadastrado");
 		});
 	};
 	function toasterMessage(msg){
