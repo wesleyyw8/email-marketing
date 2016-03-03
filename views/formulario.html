@@ -23,9 +23,11 @@
 	    </div>
 	  </div>
 	</div>
-	<div class="triangle"></div>
 </div>
 <div class="l-formulario">
+	<div class="triangle header">
+		<canvas></canvas>
+	</div>
 	<div class="pergunta">
 		<div class="pergunta--header"><div class="number">1</div><div class="title">{{question1.question}}</div></div>
 		<div class="pergunta--content">
@@ -56,6 +58,9 @@
 	</div>
 	<div class="pergunta--content enviarForulario">
 		<button type="button" class="btn btn-primary" ng-click="saveFormulario()">Enviar</button>
+	</div>
+	<div class="triangle footer">
+		<canvas style="vertical-align: bottom;"></canvas>
 	</div>
 	<div class="row fim__content--footer rowNoMargin">
 		<div class="col-xs-12">

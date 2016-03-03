@@ -10,6 +10,24 @@ routeParams,location,Config, toaster,usSpinnerService){
 	$scope.emailCliente = "";
 	$scope.telefoneCliente = "";
 
+	drawTriangles('.triangle.header', 250, 260, 270,0,40,0, "#3ea9de");
+	drawTriangles('.triangle.footer', 250, 270, 260,150,150,100, "#10172e");
+	function drawTriangles(className,x1, x2, x3,y1,y2,y3, color){
+		var canvas = angular.element(className+' canvas')[0];
+		if (canvas.getContext){
+		  var context = canvas.getContext('2d');
+		  context.beginPath();   
+		  context.moveTo(x1, y1); 
+		  context.lineTo(x2, y2);
+		  context.lineTo(x3, y3); 
+		  context.closePath();   
+		  context.fillStyle = color;
+		  context.strokeStyle = color;
+		  context.stroke();   
+		  context.fill();   
+		}
+	}
+
 	function checkRequiredFields(){
 		if ($scope.nomeCliente == ""){
 			toasterMessage('O campo nome é obrigatório');
@@ -20,7 +38,7 @@ routeParams,location,Config, toaster,usSpinnerService){
 			toasterMessage('O campo sobrenome é obrigatório');
 			return false;
 		}
-		
+
 		if ($scope.empresaCliente == ""){
 			toasterMessage('O campo empresa é obrigatório');
 			return false;
@@ -105,7 +123,7 @@ routeParams,location,Config, toaster,usSpinnerService){
 			}];
 
 		$scope.question3 = {
-			question: "Autorizo a AGILE a utilizar a informação aqui declarada para o desenvolvimento de campanhas de mercado, convites e eventos, atualizações de base de dados e para futuros contatos comerciais.",
+			question: "Autorizo a AGILE a utilizar a informação aqui declarada para o desenvolvimento de campanhas de mercado, convites a eventos, atualizações de base de dados e para futuros contatos comerciais.",
 			answers: ["Sim", "Não"],
 			finalAnswer: ""
 		};
