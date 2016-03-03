@@ -3,7 +3,7 @@
 	  <div class="row">
 	    <div class="col-xs-6">
 	    	<div class="row">
-	    		<div class="col-xs-12 text">Responda o formulário abaixo e apresente a página de confirmação em nosso estande para ganhar um Bastão Selfie.</div>	
+	    		<div class="col-xs-12 text">Responda o formulário abaixo e apresente a página de confirmação em nosso estande para ganhar um Bastão de Selfie.</div>	
 	    		<div class="col-xs-12 text">Aproveite para conversar com nossos especialistas e participe de nossas palestras.</div>	
 	    	</div>
 	    </div>
@@ -54,9 +54,13 @@
 			<p> <input type="radio" ng-model="question3.finalAnswer" value="{{question3.answers[1]}}">{{question3.answers[1]}}</span></p>
 		</div>
 	</div>
-	<div class="pergunta--content">
+	<div class="pergunta--content enviarForulario">
 		<button type="button" class="btn btn-primary" ng-click="saveFormulario()">Enviar</button>
 	</div>
-
+	<div class="row fim__content--footer rowNoMargin">
+		<div class="col-xs-12">
+			<p><a href="www.agilesolutions.com">www.agilesolutions.com</a></p>
+		</div>
+	</div>
 </div>
 <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="showSpinner" class="loader" id="loader"></span>

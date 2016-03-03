@@ -14,6 +14,10 @@
   text-align: center;
   color: white;
 }
+.rowNoMargin {
+  margin-left: 0;
+  margin-right: 0;
+}
 .loader {
   position: fixed;
   left: 50%;
@@ -76,7 +80,8 @@ input:-ms-input-placeholder {
   display: block;
   position: relative;
   margin: 0 auto;
-  width: 500px;
+  max-width: 900px;
+  background-color: #ebebeb;
 }
 .logo {
   margin-left: auto;
@@ -132,6 +137,7 @@ input:-ms-input-placeholder {
 }
 .fim__content--footer p {
   margin: 0 0 0 20px;
+  text-align: right;
 }
 @media only screen and (max-width: 720px) {
   .logo img {
@@ -143,11 +149,10 @@ input:-ms-input-placeholder {
   }
 }
 
-.pergunta {
-  margin-top: 20px;
-}
 .pergunta--header {
   display: table;
+  padding-top: 20px;
+  margin-left: 10px;
 }
 .pergunta--content {
   margin-left: 40px;
@@ -159,4 +164,7 @@ input:-ms-input-placeholder {
 .subQuestionTitle {
   color: gray;
   font-weight: bold;
+}
+.enviarForulario {
+  padding-bottom: 15px;
 }

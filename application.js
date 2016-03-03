@@ -33,60 +33,114 @@ app.controller('FormularioController',
 ['$scope','$http','$routeParams','$location','Config','toaster','usSpinnerService' ,function($scope,$http,
 routeParams,location,Config, toaster,usSpinnerService){
 	var emailRegex = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
-	$scope.question1 = {
-		question: "Qual é o seu papel no processo de decisão da empresa?",
-		answers: ["Eu decido.", "Eu influencio nas questões.", "Eu não me envolvo nas decisões."],
-		finalAnswer: ""
-	};
-	$scope.question2 = 
-		[{
-			"name": "Demandas de Software Tributário e Fiscal",
-			"selected": false,
-			"subQuestionslevel2": [
-			    { name: "Tax Declaration Framework (SAP TDF)", selected: false },
-			    { name: "SAP TAX Intelligence and Management Platform by ALLTAX", selected: false }
-			 ]
-		},{
-			"name": "SAP S/4 HANA",
-			"selected": false,
-			"subQuestionslevel2": [
-			    { name: "Implementação S/4 HANA", selected: false },
-			    { name: "Migração SAP ERP para S/4 HANA", selected: false },
-			    { name: "Migração SAP ERP para S/4 Nuvem", selected: false },
-			    { name: "S/4 HANA Finance", selected: false },
-			    { name: "RDS S/4 HANA", selected: false },
-			    { name: "Projetos sob demanda utilizando SAP HANA", selected: false },
-			    { name: "Business Intelligence", selected: false },
-			    { name: "Orçamento Planejamento", selected: false }
-			 ]
-		},{
-			"name": "Agrobusiness",
-			"selected": false,
-			"subQuestionslevel2": [
-			    { name: "Solução Integral Agro (AgroBiz)", selected: false },
-			    { name: "Laboratório de Qualidade Agrícola (AQM)", selected: false },
-			    { name: "Portal de Fornecedores Agrícola (ASM)", selected: false },
-			    { name: "Balança", selected: false },
-			    { name: "Mobilidade para Agronegócio", selected: false },
-			    { name: "GIS", selected: false }
-			 ]
-		},{
-			"name": "Outros",
-			"selected": false,
-			"subQuestionslevel2": [
-			    { name: "Internet of Things (IOT)", selected: false },
-			    { name: "Mapeamento Integral dos Consumidores (Cunsumer Insight 365)", selected: false },
-			    { name: "Projeto Florestal", selected: false },
-			    { name: "Alinhamento da estratégia de Negócio com TI", selected: false },
-			    { name: "Suporte, melhorias e recursos (AMS)", selected: false }
-			 ]
-		}];
+	createQuestions();
+	$scope.nomeCliente = "";
+	$scope.sobrenomeCliente = "";	
+	$scope.empresaCliente = "";
+	$scope.cargoCliente = "";
+	$scope.emailCliente = "";
+	$scope.telefoneCliente = "";
 
-	$scope.question3 = {
-		question: "Autorizo a AGILE a ultilizar informação aqui declarada para o desenvolvimento de campanhas de mercado, convites e eventos, atualizações de base de dados e para futuros contatos comerciais.",
-		answers: ["Sim", "Não"],
-		finalAnswer: ""
-	};
+	function checkRequiredFields(){
+		if ($scope.nomeCliente == ""){
+			toasterMessage('O campo nome é obrigatório');
+			return false;
+		}
+
+		if ($scope.sobrenomeCliente == ""){
+			toasterMessage('O campo sobrenome é obrigatório');
+			return false;
+		}
+		
+		if ($scope.empresaCliente == ""){
+			toasterMessage('O campo empresa é obrigatório');
+			return false;
+		}
+
+		if ($scope.cargoCliente == ""){
+			toasterMessage('O campo cargo é obrigatório');
+			return false;
+		}
+
+		if (!emailRegex.test($scope.emailCliente)){
+			toasterMessage('O campo email deve conter um email válido');
+			return false;
+		}
+		if ($scope.telefoneCliente == ""){
+			toasterMessage('O campo telefone é obrigatório');
+			return false;
+		}
+		if ($scope.question1.finalAnswer == ""){
+			toasterMessage('Responda a questão 1');
+			return false;
+		}
+		if (formatQuestion2().length == 0){
+			toasterMessage('Selecione pelo menos um item na questão 2');
+			return false;
+		}
+		if ($scope.question3.finalAnswer == ""){
+			toasterMessage('Responda a questão 3');
+			return false;
+		}
+
+		return true;
+	}
+	function createQuestions(){
+		$scope.question1 = {
+			question: "Qual é o seu papel no processo de decisão da sua empresa?",
+			answers: ["Eu decido", "Eu influencio nas decisões", "Eu não me envolvo nas decisões"],
+			finalAnswer: ""
+		};
+		$scope.question2 = 
+			[{
+				"name": "Demandas de Software Tributário e Fiscal",
+				"selected": false,
+				"subQuestionslevel2": [
+				    { name: "Tax Declaration Framework (SAP TDF)", selected: false },
+				    { name: "SAP TAX Intelligence and Management Platform by ALLTAX", selected: false }
+				 ]
+			},{
+				"name": "SAP S/4 HANA",
+				"selected": false,
+				"subQuestionslevel2": [
+				    { name: "Implementação S/4 HANA", selected: false },
+				    { name: "Migração SAP ERP para S/4 HANA", selected: false },
+				    { name: "Migração SAP ERP para Nuvem", selected: false },
+				    { name: "S/4 HANA Finance", selected: false },
+				    { name: "RDS S/4 HANA", selected: false },
+				    { name: "Projetos sob demanda utilizando SAP HANA", selected: false },
+				    { name: "Business Intelligence", selected: false },
+				    { name: "Orçamento e Planejamento", selected: false }
+				 ]
+			},{
+				"name": "Agrobusiness",
+				"selected": false,
+				"subQuestionslevel2": [
+				    { name: "Solução Integral Agro (AgroBiz)", selected: false },
+				    { name: "Laboratório de Qualidade Agrícola (AQM)", selected: false },
+				    { name: "Portal de Fornecedores Agrícola (ASM)", selected: false },
+				    { name: "Balança", selected: false },
+				    { name: "Mobilidade para Agronegócio", selected: false },
+				    { name: "GIS", selected: false }
+				 ]
+			},{
+				"name": "Outros",
+				"selected": false,
+				"subQuestionslevel2": [
+				    { name: "Internet of Things (IoT)", selected: false },
+				    { name: "Mapeamento Integral dos Consumidores (Cunsumer Insight 365)", selected: false },
+				    { name: "Projeto Florestal", selected: false },
+				    { name: "Alinhamento da estratégia de Negócio com TI", selected: false },
+				    { name: "Suporte, melhorias e recursos (AMS)", selected: false }
+				 ]
+			}];
+
+		$scope.question3 = {
+			question: "Autorizo a AGILE a utilizar a informação aqui declarada para o desenvolvimento de campanhas de mercado, convites e eventos, atualizações de base de dados e para futuros contatos comerciais.",
+			answers: ["Sim", "Não"],
+			finalAnswer: ""
+		};
+	}
 	$scope.saveFormulario = function(){
 		if (!checkRequiredFields())
 			return;
@@ -114,14 +168,6 @@ routeParams,location,Config, toaster,usSpinnerService){
 			angular.element("#loader").hide();
 		});
 	};
-	function checkRequiredFields(){
-		if (!emailRegex.test($scope.emailCliente)){
-			toasterMessage('O campo email deve conter um email valido');
-
-			return false;
-		}
-		return true;
-	}
 	function toasterMessage(msg){
 		toaster.pop({type: 'error', "title": msg});
 	}
