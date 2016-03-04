@@ -1,8 +1,8 @@
 app.controller('EndController',
 ['$scope','$http','$routeParams','$location','Config', function($scope,$http,
 routeParams,location,Config){
-	drawTriangles('.triangle.header', 250, 260, 270,0,40,0, "#3ea9de");
-	drawTriangles('.triangle.footer', 250, 270, 260,150,150,100, "#10172e");
+	drawTriangles('.triangle.header', 0, 60, 120,0,60,0, "#425aa6");
+	drawTriangles('.triangle.footer', 0, 60, 120,150,90,150, "#10172e");
 	function drawTriangles(className,x1, x2, x3,y1,y2,y3, color){
 		var canvas = angular.element(className+' canvas')[0];
 		if (canvas.getContext){

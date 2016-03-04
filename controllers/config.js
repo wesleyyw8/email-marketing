@@ -9,6 +9,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
 			templateUrl: 'views/end.html',
 			controller: 'EndController'
 		}).
+		when('/unsubscribe', {
+			templateUrl: 'views/unsubscribe.html',
+			controller: 'UnsubscribeController'
+		}).
 		otherwise({
 			redirectTo: '/formulario'
 		});
@@ -20,6 +24,7 @@ app.factory('Config', function() {
 		base_url: baseUrl,
 		endpoints: {
 	    	questionario: "questionario/",
+	    	unsubscribe: "questionario/unsubscribe/"
 		}
 	};
 });

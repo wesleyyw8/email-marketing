@@ -9,6 +9,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
 			templateUrl: 'views/end.html',
 			controller: 'EndController'
 		}).
+		when('/unsubscribe', {
+			templateUrl: 'views/unsubscribe.html',
+			controller: 'UnsubscribeController'
+		}).
 		otherwise({
 			redirectTo: '/formulario'
 		});
@@ -20,6 +24,7 @@ app.factory('Config', function() {
 		base_url: baseUrl,
 		endpoints: {
 	    	questionario: "questionario/",
+	    	unsubscribe: "questionario/unsubscribe/"
 		}
 	};
 });
@@ -27,8 +32,8 @@ app.factory('Config', function() {
 app.controller('EndController',
 ['$scope','$http','$routeParams','$location','Config', function($scope,$http,
 routeParams,location,Config){
-	drawTriangles('.triangle.header', 250, 260, 270,0,40,0, "#3ea9de");
-	drawTriangles('.triangle.footer', 250, 270, 260,150,150,100, "#10172e");
+	drawTriangles('.triangle.header', 0, 60, 120,0,60,0, "#425aa6");
+	drawTriangles('.triangle.footer', 0, 60, 120,150,90,150, "#10172e");
 	function drawTriangles(className,x1, x2, x3,y1,y2,y3, color){
 		var canvas = angular.element(className+' canvas')[0];
 		if (canvas.getContext){
@@ -57,8 +62,8 @@ routeParams,location,Config, toaster,usSpinnerService){
 	$scope.emailCliente = "";
 	$scope.telefoneCliente = "";
 
-	drawTriangles('.triangle.header', 250, 260, 270,0,40,0, "#3ea9de");
-	drawTriangles('.triangle.footer', 250, 270, 260,150,150,100, "#10172e");
+	drawTriangles('.triangle.header', 0, 60, 120,0,60,0, "#3ea9de");
+	drawTriangles('.triangle.footer', 0, 60, 120,150,90,150, "#10172e");
 	function drawTriangles(className,x1, x2, x3,y1,y2,y3, color){
 		var canvas = angular.element(className+' canvas')[0];
 		if (canvas.getContext){
@@ -69,8 +74,8 @@ routeParams,location,Config, toaster,usSpinnerService){
 		  context.lineTo(x3, y3); 
 		  context.closePath();   
 		  context.fillStyle = color;
-		  context.strokeStyle = color;
-		  context.stroke();   
+		  /*context.strokeStyle = color;
+		  context.stroke();   */
 		  context.fill();   
 		}
 	}
@@ -192,13 +197,12 @@ routeParams,location,Config, toaster,usSpinnerService){
 			}
 		};
 		
-		angular.element("#loader").show();
+		angular.element(".loader").show();
 		$http.post(Config.base_url+Config.endpoints.questionario, obj).then(function(response){
-			console.log('deu certo', response);
-			angular.element("#loader").hide();
+			angular.element(".loader").hide();
 			location.path("/end");
 		}, function(err){
-			angular.element("#loader").hide();
+			angular.element(".loader").hide();
 			if (err.data.message.indexOf("Duplicate entry") != -1)
 				toasterMessage("Email já cadastrado");
 		});
@@ -218,5 +222,41 @@ routeParams,location,Config, toaster,usSpinnerService){
 			});
 		});
 		return resp;
+	}
+}]);
+app.controller('UnsubscribeController',
+['$scope','$http','$routeParams','$location','Config','toaster','$timeout', function($scope,$http,
+routeParams,location,Config,toaster, $timeout){
+	//drawTriangles('.triangle.footer', 0, 60, 120,150,90,150, "#10172e");
+	function drawTriangles(className,x1, x2, x3,y1,y2,y3, color){
+		var canvas = angular.element(className+' canvas')[0];
+		if (canvas.getContext){
+		  var context = canvas.getContext('2d');
+		  context.beginPath();   
+		  context.moveTo(x1, y1); 
+		  context.lineTo(x2, y2);
+		  context.lineTo(x3, y3); 
+		  context.closePath();   
+		  context.fillStyle = color;
+		  context.strokeStyle = color;
+		  context.stroke();   
+		  context.fill();   
+		}
+	}
+	$scope.unscribeClick = function(){
+		var obj = {
+			email : $scope.email
+		};
+		$http.post(Config.base_url+Config.endpoints.unsubscribe, obj).then(function(response){
+			toaster.pop({type: 'success', "title": "Email descadastrado com sucesso"});
+			angular.element(".loader").hide();
+			$timeout(function(){
+				window.location.href = "http://www.agilesolutions.com"
+			},2000);
+		}, function(err){
+			angular.element(".loader").hide();
+			if (err.data.message.indexOf("Duplicate entry") != -1)
+				toaster.pop({type: 'error', "title": "Email já foi descadastrado"});
+		});
 	}
 }]);
